@@ -13,8 +13,10 @@ class CreateUserService {
     if(!email)throw new AppError('Por favor, preencha o e-mail');
     if(!password)throw new AppError('Por favor, digite a senha');
 
+    const emailFormated = email.toLocaleLowerCase();
+
     const userAlreadyExist = await UserModel.findOne({ 
-      'confidential.email': email.toLocaleLowerCase() 
+      'confidential.email': emailFormated
     });
     
     if (userAlreadyExist) throw new AppError('User already exist!');
@@ -23,7 +25,7 @@ class CreateUserService {
       name, 
       password,
       confidential:{
-        email
+        email: emailFormated
       }
     }
 
