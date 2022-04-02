@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 export interface IListCustomers {
-  _id: mongoose.Types.ObjectId
+  customerId: mongoose.Types.ObjectId
 }
 
 export interface IConfidential {

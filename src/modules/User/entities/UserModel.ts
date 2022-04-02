@@ -25,7 +25,10 @@ const UserSchema = new Schema<IUser>(
     listCustomers: {
       type: [
         {
-          _id: Schema.Types.ObjectId
+          customerId: {
+            type: Schema.Types.ObjectId,
+            ref: 'customers'
+          }
         }
       ],
       default: []
