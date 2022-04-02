@@ -26,6 +26,7 @@ class CreateCustomerService {
     paymentMethod,
     serviceStart  
   }: IRequest){
+    if(!userId) throw new AppError('Internal server error!');
     if(!name) throw new AppError('Preencha o nome da empresa!');
     if(!responsibleName) throw new AppError('Preencha o nome do responsável!');
     if(!email) throw new AppError('Preencha o e-mail!');
