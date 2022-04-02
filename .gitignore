@@ -6,4 +6,5 @@ temp/
 dist/
 .env
 .env.dev
+.env.local
 ormconfig.json
