@@ -14,10 +14,10 @@ class GetUserService{
     if(email) userId = null;
 
     if (userId && !email) {
-      const UserAlreadyExist = await UserModel.findOne({_id: userId});
+      const UserAlreadyExist = await UserModel.findOne({_id: userId}).populate('listCustomers.customerId');
       user = UserAlreadyExist;
     } else if (email && !userId) {
-      const UserAlreadyExist = await UserModel.findOne({'contact.email': email});
+      const UserAlreadyExist = await UserModel.findOne({'contact.email': email}).populate('listCustomers.customerId');
       user = UserAlreadyExist;
     }
 

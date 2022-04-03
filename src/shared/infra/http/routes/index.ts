@@ -9,7 +9,7 @@ const routes = Router();
 
 // Routes 
 routes.use('/user', userRoutes);
-routes.use(ensureAuthenticated);
+//routes.use(ensureAuthenticated);
 routes.use('/customer', customerRoutes);
 
 export default routes;
