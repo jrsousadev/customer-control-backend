@@ -52,9 +52,9 @@ class CreateCustomerService {
     const contract = {
       userResponsible: userAlreadyExist._id,
       value,
-      dueDate,
+      dueDate: `${dueDate}T00:00:00.000Z`,
       paymentMethod,
-      serviceStart
+      serviceStart: `${serviceStart}T00:00:00.000Z`
     }
 
     const data = {
