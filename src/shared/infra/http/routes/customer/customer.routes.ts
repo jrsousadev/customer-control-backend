@@ -3,6 +3,7 @@ import { CreateCustomerController } from "../../../../../modules/Customer/UseCas
 import { DeleteCustomerController } from "../../../../../modules/Customer/UseCases/DeleteCustomer/DeleteCustomerController";
 import { GetCustomerController } from "../../../../../modules/Customer/UseCases/GetCustomer/GetCustomerController";
 import { UpdateCustomerController } from "../../../../../modules/Customer/UseCases/UpdateCustomer/UpdateCustomerController";
+import { UpdateDueDateController } from "../../../../../modules/Customer/UseCases/UpdateDueDate/UpdateDueDateController";
 
 const customerRoutes = Router();
 
@@ -21,6 +22,10 @@ customerRoutes.post('/update', updateCustomerController.handle);
 //Delete
 const deleteCustomerController = new DeleteCustomerController();
 customerRoutes.delete('/delete', deleteCustomerController.handle);
+
+//Update Due Date
+const updateDueDateController = new UpdateDueDateController();
+customerRoutes.post('/update-dueDate', updateDueDateController.handle);
 
 
 export default customerRoutes;
