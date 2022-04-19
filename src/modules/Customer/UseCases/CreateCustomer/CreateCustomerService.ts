@@ -41,6 +41,8 @@ class CreateCustomerService {
       phone
     }
 
+    console.log('oi')
+
     const contract = {
       userResponsible: userAlreadyExist._id,
       value,
