@@ -14,10 +14,10 @@ class GetCustomerService{
     if(email) customerId = null;
 
     if (customerId && !email) {
-      const customerAlreadyExist = await CustomerModel.findOne({_id: customerId});
+      const customerAlreadyExist = await CustomerModel.findOne({_id: customerId}).sort({ 'contract.dueDate': -1 });
       customer = customerAlreadyExist;
     } else if (email && !customerId) {
-      const customerAlreadyExist = await CustomerModel.findOne({'contact.email': email});
+      const customerAlreadyExist = await CustomerModel.findOne({'contact.email': email}).sort({ 'contract.dueDate': -1 });
       customer = customerAlreadyExist;
     }
 
