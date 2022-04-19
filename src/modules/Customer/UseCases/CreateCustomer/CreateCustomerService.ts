@@ -27,14 +27,6 @@ class CreateCustomerService {
     serviceStart  
   }: IRequest){
     if(!userId) throw new AppError('Internal server error!');
-    if(!name) throw new AppError('Preencha o nome da empresa!');
-    if(!responsibleName) throw new AppError('Preencha o nome do responsável!');
-    if(!email) throw new AppError('Preencha o e-mail!');
-    if(!phone) throw new AppError('Preencha o telefone!');
-    if(!value) throw new AppError('Preencha o valor do contrato!');
-    if(!dueDate) throw new AppError('Preencha o vencimento do contrato!');
-    if(!paymentMethod) throw new AppError('Preencha o método de pagamento do contrato!');
-    if(!serviceStart) throw new AppError('Preencha a data de inicio do contrato!');
     
     const emailFormated = email.toLocaleLowerCase();
 
@@ -52,9 +44,9 @@ class CreateCustomerService {
     const contract = {
       userResponsible: userAlreadyExist._id,
       value,
-      dueDate: `${dueDate}T00:00:00.000Z`,
+      dueDate: `${dueDate}T13:00:00.000Z`,
       paymentMethod,
-      serviceStart: `${serviceStart}T00:00:00.000Z`
+      serviceStart: `${serviceStart}T13:00:00.000Z`
     }
 
     const data = {
