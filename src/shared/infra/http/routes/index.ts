@@ -4,6 +4,7 @@ import { Router } from "express";
 import userRoutes from "./user.routes";
 import customerRoutes from "./customer.routes";
 import ensureAuthenticated from "../middlewares/ensureAuthenticated";
+import billingPerMounthRoutes from "./billingPerMounth.routes";
 
 const routes = Router();
 
@@ -11,5 +12,6 @@ const routes = Router();
 routes.use('/user', userRoutes);
 routes.use(ensureAuthenticated);
 routes.use('/customer', customerRoutes);
+routes.use('/mounth', billingPerMounthRoutes);
 
 export default routes;
