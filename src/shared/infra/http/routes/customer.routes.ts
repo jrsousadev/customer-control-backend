@@ -2,6 +2,7 @@ import { Router } from "express";
 import { CreateCustomerController } from "../../../../modules/Customer/UseCases/CreateCustomer/CreateCustomerController";
 import { DeleteCustomerController } from "../../../../modules/Customer/UseCases/DeleteCustomer/DeleteCustomerController";
 import { GetCustomerController } from "../../../../modules/Customer/UseCases/GetCustomer/GetCustomerController";
+import { PaymentSucesssController } from "../../../../modules/Customer/UseCases/PaymentSuccess/PaymentSuccessController";
 import { UpdateCustomerController } from "../../../../modules/Customer/UseCases/UpdateCustomer/UpdateCustomerController";
 import { UpdateDueDateController } from "../../../../modules/Customer/UseCases/UpdateDueDate/UpdateDueDateController";
 
@@ -27,5 +28,8 @@ customerRoutes.delete('/delete', deleteCustomerController.handle);
 const updateDueDateController = new UpdateDueDateController();
 customerRoutes.post('/update-dueDate', updateDueDateController.handle);
 
+//Payment Success
+const paymentSucessController = new PaymentSucesssController();
+customerRoutes.post('/payment-success', paymentSucessController.handle);
 
 export default customerRoutes;
