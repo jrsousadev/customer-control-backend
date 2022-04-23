@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import { AppError } from "../../../../shared/errors/AppError";
 import { CustomerModel } from "../../entities/CustomerModel";
 
@@ -13,9 +14,10 @@ class UpdateDueDateService {
 
     const customerAlreadyExist = await CustomerModel.findOne({
       _id: customerId,
-      'contract.userResponsible': userId
+      'contract.userResponsible': userId,
     });
-    if(!customerAlreadyExist) throw new AppError('Internal server error!');
+
+    if(!customerAlreadyExist || customerAlreadyExist === null) throw new AppError('Internal server error!');
 
     const customer = await CustomerModel.findOneAndUpdate({
       _id: customerId

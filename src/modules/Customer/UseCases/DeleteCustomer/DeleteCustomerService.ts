@@ -12,8 +12,6 @@ class DeleteCustomerService {
     userId,
     customerId,
   }: IRequest){
-    if(!userId || !customerId) throw new AppError('Internal server error!');
-    
     const userAlreadyExist = await UserModel.findOne({_id: userId});
     if(!userAlreadyExist) throw new AppError('Internal server error!');
 

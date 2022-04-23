@@ -26,6 +26,7 @@ class CreateCustomerService {
     paymentMethod,
     serviceStart  
   }: IRequest){
+
     if(!userId) throw new AppError('Internal server error!');
     
     const emailFormated = email.toLocaleLowerCase();
@@ -33,8 +34,8 @@ class CreateCustomerService {
     const userAlreadyExist = await UserModel.findOne({ _id: userId });
     if(!userAlreadyExist) throw new AppError('Internal server error!');
 
-    const customerAlreadyExist = await CustomerModel.findOne({'contact.email': emailFormated});
-    if(customerAlreadyExist) throw new AppError('Já existe um cliente cadastrado com este e-mail');
+    const customerAlreadyExist = await CustomerModel.findOne({name: name});
+    if(customerAlreadyExist) throw new AppError('Já existe um cliente com este nome');
 
     const contact = {
       email: emailFormated,
