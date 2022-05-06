@@ -1,37 +1,20 @@
-import { AppError } from "../../../../../shared/errors/AppError";
-import { UserModel } from "../../../User/entities/UserModel";
+import { BillingPerMounthRepository } from "../../../../BillingsPerMounthsRepository";
 import { BillingPerMounthModel } from "../../entities/BillingPerMounthModel";
 
-interface IRequest {
+interface MongoDBCreateBillingPerMounthRepositoryRequest {
   mounthName: string;
   billing: string;
   year: string;
   userId: string;
 }
 
-class CreateBillingPerMounthService {
-  async execute({
+export class MongoDBCreateBillingPerMounthRepository implements BillingPerMounthRepository {
+  async create({
     mounthName,
     billing,
     year,
     userId,
-  }: IRequest){
-    if(!mounthName || !billing || !year || !userId) throw new AppError("Preencha todas as informações")
-
-    const userAlreadyExist = await UserModel.findOne({
-      _id: userId
-    });
-
-    if(!userAlreadyExist) throw new AppError("Internal server error!");
-
-    const MounthAlteradyExist = await BillingPerMounthModel.findOne({
-      userResponsible: userId,
-      mounthName: mounthName.toLocaleLowerCase(),
-      year
-    });
-
-    if(MounthAlteradyExist) throw new AppError('Mês já criado, verifique o ano!');
-
+  }: MongoDBCreateBillingPerMounthRepositoryRequest) {
     const data = {
       userResponsible: userId,
       mounthName: mounthName.toLocaleLowerCase(),
@@ -39,10 +22,6 @@ class CreateBillingPerMounthService {
       year,
     }
 
-    const mounth = await BillingPerMounthModel.create(data);
-
-    return mounth;
-  } 
+    await BillingPerMounthModel.create(data);
+  }
 }
-
-export { CreateBillingPerMounthService }
