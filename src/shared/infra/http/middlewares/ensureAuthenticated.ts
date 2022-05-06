@@ -1,7 +1,7 @@
 import { verify } from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
 import { AppError } from '../../../errors/AppError';
-import { UserModel } from '../../../../modules/User/entities/UserModel';
+import { UserModel } from '../../../../modules/mongodb/User/entities/UserModel';
 
 interface IPayload{
   _id: string;
