@@ -10,11 +10,11 @@ class MongoDBGetUserRepository implements UsersRepository {
   async getUser({email, userId}: MongoDBGetUserRepositoryRequest) {
 
     if(email){
-      return await UserModel.findOne({'confidential.email': email})
+      return await UserModel.findOne({'confidential.email': email}).populate('listCustomers.customerId');
     } 
 
     if(userId) {
-      return await UserModel.findOne({ _id: userId })
+      return await UserModel.findOne({ _id: userId }).populate('listCustomers.customerId');
     }
 
   }
