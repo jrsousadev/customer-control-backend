@@ -1,5 +1,4 @@
-
-import { UsersRepository } from "../../modules/UsersRepository";
+import { UsersRepository } from "../../repositories/UsersRepository";
 import { AppError } from "../../shared/errors/AppError";
 
 interface GetUserUseCaseRequest {
@@ -9,7 +8,7 @@ interface GetUserUseCaseRequest {
 
 export class GetUserUseCase {
   constructor(
-    private usersRepositoryGetUser: UsersRepository,
+    private usersRepository: UsersRepository,
   ) { }
 
   async execute(request: GetUserUseCaseRequest) {
@@ -21,10 +20,10 @@ export class GetUserUseCase {
     if(email) userId = null;
 
     if (userId && !email) {
-      const UserAlreadyExist = await this.usersRepositoryGetUser.getUser({ userId });
+      const UserAlreadyExist = await this.usersRepository.getUser({ userId });
       user = UserAlreadyExist;
     } else if (email && !userId) {
-      const UserAlreadyExist = await this.usersRepositoryGetUser.getUser({ email });
+      const UserAlreadyExist = await this.usersRepository.getUser({ email });
       user = UserAlreadyExist;
     }
 

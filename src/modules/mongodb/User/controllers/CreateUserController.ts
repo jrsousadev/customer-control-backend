@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
-import { CreateUserUseCase } from "../../../../../useCases/User/CreateUserUseCase";
-import { MongoDBGetUserRepository } from "../GetUser/GetUserService";
-import { MongoDBCreateUserRepository } from "./CreateUserService";
+import { CreateUserUseCase } from "../../../../useCases/User/CreateUserUseCase";
+import { MongoDBUsersRepository } from "../UsersRepositoryMethods";
 
 class CreateUserController {
   async handle(request: Request, response: Response): Promise<Response> {
@@ -12,12 +11,10 @@ class CreateUserController {
     } = request.body;
 
 
-    const mongoDBGetUserRepository = new MongoDBGetUserRepository();
-    const mongoDBCreateUserRepository = new MongoDBCreateUserRepository();
+    const mongoDBUsersRepository = new MongoDBUsersRepository();
 
     const createUserUseCase = new CreateUserUseCase(
-      mongoDBGetUserRepository,
-      mongoDBCreateUserRepository
+      mongoDBUsersRepository
     );
   
     const user = await createUserUseCase.execute({

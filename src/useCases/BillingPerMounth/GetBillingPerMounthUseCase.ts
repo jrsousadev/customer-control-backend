@@ -1,6 +1,7 @@
 
-import { BillingPerMounthRepository } from "../../modules/BillingsPerMounthsRepository";
-import { UsersRepository } from "../../modules/UsersRepository";
+
+import { BillingPerMounthRepository } from "../../repositories/BillingsPerMounthsRepository";
+import { UsersRepository } from "../../repositories/UsersRepository";
 import { AppError } from "../../shared/errors/AppError";
 
 interface GetBillingPerMounthUseCaseRequest {
@@ -9,18 +10,18 @@ interface GetBillingPerMounthUseCaseRequest {
 
 export class GetBillingPerMounthUseCase {
   constructor(
-    private usersRepositoryGetUser: UsersRepository,
-    private billingPerMounthRepositoryGetBilling: BillingPerMounthRepository,
+    private usersRepository: UsersRepository,
+    private billingPerMounthRepository: BillingPerMounthRepository,
   ) {}
 
   async execute(request: GetBillingPerMounthUseCaseRequest) {
     let { userId } = request;
 
-    const userAlreadyExist = await this.usersRepositoryGetUser.getUser({ userId });
+    const userAlreadyExist = await this.usersRepository.getUser({ userId });
 
     if(!userAlreadyExist) throw new AppError("Internal server error!");
 
-    const mounths = await this.billingPerMounthRepositoryGetBilling.getAllBillingPerMounth({
+    const mounths = await this.billingPerMounthRepository.getAll({
       userId
     });
 

@@ -14,7 +14,7 @@ export interface UsersCreateData {
 }
 
 export interface UsersRepository {
-  getUserAuthenticate?: (data: UsersGetAuthenticateData) => Promise<any>;
-  getUser?: (data: UsersGetData) => Promise<any>;
-  create?: (data: UsersCreateData) => Promise<void>;
+  getUserAuthenticate: (data: UsersGetAuthenticateData) => Promise<any>;
+  getUser: (data: UsersGetData) => Promise<any>;
+  create: (data: UsersCreateData) => Promise<void>;
 }

@@ -16,7 +16,7 @@ export interface BillingPerMounthGetOneData {
 }
 
 export interface BillingPerMounthRepository {
-  getAllBillingPerMounth?: (data: BillingPerMounthGetData) => Promise<any>;
-  getOneBillingPerMounth?: (data: BillingPerMounthGetOneData) => Promise<any>;
-  create?: (data: BillingPerMounthCreateData) => Promise<void>;
+  getAll: (data: BillingPerMounthGetData) => Promise<any>;
+  getOne: (data: BillingPerMounthGetOneData) => Promise<any>;
+  create: (data: BillingPerMounthCreateData) => Promise<void>;
 }

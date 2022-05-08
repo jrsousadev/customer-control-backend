@@ -1,5 +1,4 @@
-
-import { UsersRepository } from "../../modules/UsersRepository";
+import { UsersRepository } from "../../repositories/UsersRepository";
 import { AppError } from "../../shared/errors/AppError";
 
 interface CreateUserUseCaseRequest {
@@ -10,8 +9,7 @@ interface CreateUserUseCaseRequest {
 
 export class CreateUserUseCase {
   constructor(
-    private usersRepositoryGetUser: UsersRepository,
-    private usersRepositoryCreateUser: UsersRepository,
+    private usersRepository: UsersRepository,
   ) { }
 
   async execute(request: CreateUserUseCaseRequest) {
@@ -19,7 +17,7 @@ export class CreateUserUseCase {
 
     const emailFormated = email.toLocaleLowerCase();
 
-    const userAlreadyExist = await this.usersRepositoryGetUser.getUser({email: emailFormated});
+    const userAlreadyExist = await this.usersRepository.getUser({email: emailFormated});
 
     if (userAlreadyExist) throw new AppError('User already exist!');
 
@@ -29,6 +27,6 @@ export class CreateUserUseCase {
       email: emailFormated
     }
 
-    await this.usersRepositoryCreateUser.create(data);
+    await this.usersRepository.create(data);
   }
 }

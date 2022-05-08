@@ -12,6 +12,6 @@ const routes = Router();
 routes.use('/user', userRoutes);
 routes.use(ensureAuthenticated);
 routes.use('/customer', customerRoutes);
-routes.use('/mounth', billingPerMounthRoutes);
+routes.use('/mounth', billingPerMounthRoutes); 
 
 export default routes;
