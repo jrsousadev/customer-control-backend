@@ -5,7 +5,7 @@ import cors from "cors";
 import "express-async-errors";
 
 import routes from "./routes";
-import { AppError } from "../../errors/AppError";
+import { AppError } from "../errors/AppError";
 
 dotenv.config();
 mongoose.connect(process.env.MONGO_CONNECTION as string);
