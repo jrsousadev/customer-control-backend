@@ -9,9 +9,9 @@ interface CreateCustomerServiceRequest {
   email: string;
   phone: string;
   value: number;
-  dueDate: Date;
+  dueDate: string;
   paymentMethod: 'semestral' | 'bimestral' | 'trimestral';
-  serviceStart: Date;
+  serviceStart: string;
 }
 
 export class CreateCustomerUseCase {
@@ -38,28 +38,28 @@ export class CreateCustomerUseCase {
     const userAlreadyExist = await this.usersRepository.getUser({ userId });
     if(!userAlreadyExist) throw new AppError('Internal server error!');
 
-    const customerAlreadyExist = await this.customersRepository.getOne({name: name});
+    const customerAlreadyExist = await this.customersRepository.getOneInName({name, userId});
     if(customerAlreadyExist) throw new AppError('Já existe um cliente com este nome');
-
-    const contact = {
-      email: emailFormated,
-      phone
-    }
-
-    const contract = {
-      userResponsible: userAlreadyExist._id,
-      value,
-      dueDate: `${dueDate}T13:00:00.000Z`,
-      paymentMethod,
-      serviceStart: `${serviceStart}T13:00:00.000Z`
-    }
 
     const data = {
       name,
       responsibleName,
-      contact,
-      contract,
+      userResponsible: userAlreadyExist._id,
+      value,
+      dueDate,
+      paymentMethod,
+      serviceStart,
+      email: emailFormated,
+      phone,
+      userId,
     }
-  }
 
+    const customer = await this.customersRepository.create(data);
+
+    await this.usersRepository.updateListCustomers({
+      customerId: customer._id,
+      userId,
+      functionMethod: 'addInList'
+    });
+  }
 }

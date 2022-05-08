@@ -1,5 +1,7 @@
 import { Request, Response } from "express";
-import { UpdateCustomerService } from "./UpdateCustomerService";
+import { UpdateCustomerUseCase } from "../../../../useCases/Customer/UpdateCustomerUseCase";
+import { MongoDBUsersRepository } from "../../User/UsersRepositoryMethods";
+import { MongoDBCustomersRepository } from "../CustomersRepositoryMethods";
 
 class UpdateCustomerController {
   async handle(request: Request, response: Response): Promise<Response> {
@@ -16,9 +18,14 @@ class UpdateCustomerController {
       serviceStart,
     } = request.body;
 
-    const updateCustomerService = new UpdateCustomerService();
+    const mongoDBCustomersRepository = new MongoDBCustomersRepository();
+    const mongoDBUsersRepository = new MongoDBUsersRepository();
+    const updateCustomerUseCase = new UpdateCustomerUseCase(
+      mongoDBUsersRepository,
+      mongoDBCustomersRepository
+    );
   
-    const customer = await updateCustomerService.execute({
+    const customer = await updateCustomerUseCase.execute({
       userId,
       customerId,
       name,

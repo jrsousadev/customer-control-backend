@@ -13,8 +13,15 @@ export interface UsersCreateData {
   email: string;
 }
 
+export interface UsersUpdateListCustomersData {
+  userId: string;
+  customerId: string;
+  functionMethod: 'removeInList' | 'addInList';
+}
+
 export interface UsersRepository {
   getUserAuthenticate: (data: UsersGetAuthenticateData) => Promise<any>;
   getUser: (data: UsersGetData) => Promise<any>;
   create: (data: UsersCreateData) => Promise<void>;
+  updateListCustomers: (data: UsersUpdateListCustomersData) => Promise<void>;
 }

@@ -1,14 +1,17 @@
-import moment from "moment";
-import { AppError } from "../../../../../shared/errors/AppError";
-import { UserModel } from "../../../User/entities/UserModel";
-import { CustomerModel } from "../../entities/CustomerModel";
+import { CustomersRepository } from "../../repositories/CustomersRepository";
+import { UsersRepository } from "../../repositories/UsersRepository";
+import { AppError } from "../../shared/errors/AppError";
 
-interface IRequest {
+interface PaymentSuccessCustomerUseCaseRequest {
   customerId: string;
   userId: string;
 }
 
-class PaymentSuccessService {
+export class PaymentSuccessCustomerUseCase {
+  constructor(
+    private usersRepository: UsersRepository,
+    private customersRepository: CustomersRepository,
+  ) {}
 
   private async updateDueDate(dueDate) {
     let day = dueDate.getDate();
@@ -23,12 +26,11 @@ class PaymentSuccessService {
     return new Date(`${year}-${mounth}-${day}`);
   }
 
-  async execute({ userId, customerId }: IRequest){
-
-    const userAlreadyExist = await UserModel.findOne({ _id: userId });
+  async execute({customerId, userId}: PaymentSuccessCustomerUseCaseRequest) {
+    const userAlreadyExist = await this.usersRepository.getUser({ userId });
     if(!userAlreadyExist || null ) throw new AppError('Internal server error');
 
-    const customerAlteradyExist = await CustomerModel.findOne({_id: customerId });
+    const customerAlteradyExist = await this.customersRepository.getOneInIDAndEmail({customerId});
     if(!customerAlteradyExist || null ) throw new AppError('Internal server error');
 
     const getDueDate = customerAlteradyExist?.contract?.dueDate;
@@ -39,6 +41,5 @@ class PaymentSuccessService {
 
     return customerAlteradyExist;
   }
-}
 
-export { PaymentSuccessService }
+}
