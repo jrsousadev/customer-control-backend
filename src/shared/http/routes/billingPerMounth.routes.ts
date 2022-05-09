@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { CreateBillingPerMounthController } from "../../../modules/mongodb/BillingPerMounth/controllers/CreateBillingPerMounthController";
-import { GetBillingPerMounthController } from "../../../modules/mongodb/BillingPerMounth/controllers/GetBillingPerMounthController";
-import { GetOneBillingPerMounthController } from "../../../modules/mongodb/BillingPerMounth/controllers/GetOneBillingPerMounthController";
+import { CreateBillingPerMounthController } from "../../controllers/BillingPerMounthControllers/CreateBillingPerMounthController";
+import { GetBillingPerMounthController } from "../../controllers/BillingPerMounthControllers/GetBillingPerMounthController";
+import { GetOneBillingPerMounthController } from "../../controllers/BillingPerMounthControllers/GetOneBillingPerMounthController";
 
 const billingPerMounthRoutes = Router();
 

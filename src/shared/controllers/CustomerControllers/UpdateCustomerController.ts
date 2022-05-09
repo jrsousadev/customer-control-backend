@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
-import { UpdateCustomerUseCase } from "../../../../useCases/Customer/UpdateCustomerUseCase";
-import { MongoDBUsersRepository } from "../../User/UsersRepositoryMethods";
-import { MongoDBCustomersRepository } from "../CustomersRepositoryMethods";
+import { container } from "tsyringe";
+import { UpdateCustomerUseCase } from "../../../useCases/Customer/UpdateCustomerUseCase";
 
 class UpdateCustomerController {
   async handle(request: Request, response: Response): Promise<Response> {
@@ -18,12 +17,7 @@ class UpdateCustomerController {
       serviceStart,
     } = request.body;
 
-    const mongoDBCustomersRepository = new MongoDBCustomersRepository();
-    const mongoDBUsersRepository = new MongoDBUsersRepository();
-    const updateCustomerUseCase = new UpdateCustomerUseCase(
-      mongoDBUsersRepository,
-      mongoDBCustomersRepository
-    );
+    const updateCustomerUseCase = container.resolve(UpdateCustomerUseCase)
   
     const customer = await updateCustomerUseCase.execute({
       userId,

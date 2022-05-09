@@ -1,5 +1,6 @@
 
 
+import { inject, injectable } from "tsyringe";
 import { BillingPerMounthRepository } from "../../repositories/BillingsPerMounthsRepository";
 import { UsersRepository } from "../../repositories/UsersRepository";
 import { AppError } from "../../shared/errors/AppError";
@@ -11,9 +12,12 @@ interface CreateBillingPerMounthUseCaseRequest {
   userId: string;
 }
 
+@injectable()
 export class CreateBillingPerMounthUseCase {
   constructor(
+    @inject("UsersRepository")
     private usersRepository: UsersRepository,
+    @inject("BillingsPerMounthRepository")
     private billingsPerMounthRepository: BillingPerMounthRepository,
   ) { }
 

@@ -1,16 +1,19 @@
+import { inject, injectable } from "tsyringe";
 import { CustomersRepository } from "../../repositories/CustomersRepository";
 
-interface GetOneCustomerUseCaseRequest {
+interface GetOneInNameCustomerUseCaseRequest {
   name: string;
   userId: string;
 }
 
-export class GetOneCustomerUseCase {
+@injectable()
+export class GetOneInNameCustomerUseCase {
   constructor(
+    @inject("CustomersRepository")
     private customersRepository: CustomersRepository,
   ) {}
 
-  async execute({ name, userId }: GetOneCustomerUseCaseRequest) {
+  async execute({ name, userId }: GetOneInNameCustomerUseCaseRequest) {
     return this.customersRepository.getOneInName({
       name, userId
     });

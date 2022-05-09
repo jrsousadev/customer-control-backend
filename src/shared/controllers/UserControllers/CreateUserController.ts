@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { CreateUserUseCase } from "../../../../useCases/User/CreateUserUseCase";
-import { MongoDBUsersRepository } from "../UsersRepositoryMethods";
+import { container } from "tsyringe";
+import { CreateUserUseCase } from "../../../useCases/User/CreateUserUseCase";
 
 class CreateUserController {
   async handle(request: Request, response: Response): Promise<Response> {
@@ -10,13 +10,8 @@ class CreateUserController {
       password,
     } = request.body;
 
+    const createUserUseCase = container.resolve(CreateUserUseCase);
 
-    const mongoDBUsersRepository = new MongoDBUsersRepository();
-
-    const createUserUseCase = new CreateUserUseCase(
-      mongoDBUsersRepository
-    );
-  
     const user = await createUserUseCase.execute({
       name,
       email,

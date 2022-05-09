@@ -1,3 +1,4 @@
+import { inject, injectable } from "tsyringe";
 import { CustomersRepository } from "../../repositories/CustomersRepository";
 
 interface GetOneInIDCustomerUseCaseRequest {
@@ -5,8 +6,10 @@ interface GetOneInIDCustomerUseCaseRequest {
   userId: string;
 }
 
+@injectable()
 export class GetOneInIDCustomerUseCase {
   constructor(
+    @inject("CustomersRepository")
     private customersRepository: CustomersRepository,
   ) {}
 

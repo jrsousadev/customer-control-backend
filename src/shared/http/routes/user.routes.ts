@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { AuthenticateUserController } from "../../../modules/mongodb/User/controllers/AuthenticateUserController";
-import { CreateUserController } from "../../../modules/mongodb/User/controllers/CreateUserController";
-import { GetUserController } from "../../../modules/mongodb/User/controllers/GetUserController";
+import { AuthenticateUserController } from "../../controllers/UserControllers/AuthenticateUserController";
+import { CreateUserController } from "../../controllers/UserControllers/CreateUserController";
+import { GetUserController } from "../../controllers/UserControllers/GetUserController";
 import ensureAuthenticated from "../middlewares/ensureAuthenticated";
 
 const userRoutes = Router();

@@ -1,3 +1,4 @@
+import { inject, injectable } from "tsyringe";
 import { CustomersRepository } from "../../repositories/CustomersRepository";
 import { AppError } from "../../shared/errors/AppError";
 
@@ -6,8 +7,10 @@ interface GetOneInIDAndEmailCustomerUseCaseRequest {
   email: string;
 }
 
+@injectable()
 export class GetOneInIDAndEmailCustomerUseCase {
   constructor(
+    @inject("CustomersRepository")
     private customersRepository: CustomersRepository,
   ) {}
 

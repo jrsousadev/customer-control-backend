@@ -1,3 +1,4 @@
+import { inject, injectable } from "tsyringe";
 import { CustomersRepository } from "../../repositories/CustomersRepository";
 import { AppError } from "../../shared/errors/AppError";
 
@@ -7,8 +8,10 @@ interface UpdateDueDateCustomerUseCaseRequest {
   dueDate: string;
 }
 
+@injectable()
 export class UpdateDueDateCustomerUseCase {
   constructor(
+    @inject("CustomersRepository")
     private customersRepository: CustomersRepository,
   ){}
 

@@ -1,10 +1,10 @@
 import { Router } from "express";
-import { CreateCustomerController } from "../../../modules/mongodb/Customer/controllers/CreateCustomerController";
-import { DeleteCustomerController } from "../../../modules/mongodb/Customer/controllers/DeleteCustomerController";
-import { GetCustomerController } from "../../../modules/mongodb/Customer/controllers/GetCustomerController";
-import { PaymentSucesssController } from "../../../modules/mongodb/Customer/controllers/PaymentSuccessController";
-import { UpdateCustomerController } from "../../../modules/mongodb/Customer/controllers/UpdateCustomerController";
-import { UpdateDueDateController } from "../../../modules/mongodb/Customer/controllers/UpdateDueDateController";
+import { CreateCustomerController } from "../../controllers/CustomerControllers/CreateCustomerController";
+import { DeleteCustomerController } from "../../controllers/CustomerControllers/DeleteCustomerController";
+import { GetCustomerController } from "../../controllers/CustomerControllers/GetCustomerController";
+import { PaymentSucesssController } from "../../controllers/CustomerControllers/PaymentSuccessController";
+import { UpdateCustomerController } from "../../controllers/CustomerControllers/UpdateCustomerController";
+import { UpdateDueDateController } from "../../controllers/CustomerControllers/UpdateDueDateController";
 
 const customerRoutes = Router();
 

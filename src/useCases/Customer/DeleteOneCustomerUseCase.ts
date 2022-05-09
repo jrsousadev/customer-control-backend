@@ -1,3 +1,4 @@
+import { inject, injectable } from "tsyringe";
 import { CustomersRepository } from "../../repositories/CustomersRepository";
 import { UsersRepository } from "../../repositories/UsersRepository";
 import { AppError } from "../../shared/errors/AppError";
@@ -7,10 +8,13 @@ interface DeleteOneCustomerUseCaseRequest {
   customerId: string;
 }
 
+@injectable()
 export class DeleteOneCustomerUseCase { 
   constructor(
+    @inject("UsersRepository")
     private usersRepository: UsersRepository,
-    private customersRepository: CustomersRepository
+    @inject("CustomersRepository")
+    private customersRepository: CustomersRepository,
   ){}
 
   async execute({

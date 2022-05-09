@@ -1,4 +1,5 @@
 import { UsersRepository } from "../../repositories/UsersRepository";
+import { inject, injectable } from "tsyringe";
 import { AppError } from "../../shared/errors/AppError";
 
 interface GetUserUseCaseRequest {
@@ -6,8 +7,10 @@ interface GetUserUseCaseRequest {
   userId: string;
 }
 
+@injectable()
 export class GetUserUseCase {
   constructor(
+    @inject("UsersRepository")
     private usersRepository: UsersRepository,
   ) { }
 

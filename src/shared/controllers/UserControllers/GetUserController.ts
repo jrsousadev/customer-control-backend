@@ -1,16 +1,12 @@
 import { Response, Request } from "express";
-import { GetUserUseCase } from "../../../../useCases/User/GetUserUseCase";
-import { MongoDBUsersRepository } from "../UsersRepositoryMethods";
+import { container } from "tsyringe";
+import { GetUserUseCase } from "../../../useCases/User/GetUserUseCase";
 
 class GetUserController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { userId, email } = request.body;
 
-    const mongoDBUsersRepository = new MongoDBUsersRepository();
-
-    const getUserUseCase = new GetUserUseCase(
-      mongoDBUsersRepository
-    );
+    const getUserUseCase = container.resolve(GetUserUseCase)
 
     const user = await getUserUseCase.execute({
       userId,

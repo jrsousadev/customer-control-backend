@@ -1,4 +1,5 @@
 import { UsersRepository } from "../../repositories/UsersRepository";
+import { inject, injectable } from "tsyringe";
 import { AppError } from "../../shared/errors/AppError";
 
 interface CreateUserUseCaseRequest {
@@ -7,10 +8,12 @@ interface CreateUserUseCaseRequest {
   password: string;
 }
 
+@injectable()
 export class CreateUserUseCase {
   constructor(
+    @inject("UsersRepository")
     private usersRepository: UsersRepository,
-  ) { }
+  ) {}
 
   async execute(request: CreateUserUseCaseRequest) {
     let { name, email, password } = request;

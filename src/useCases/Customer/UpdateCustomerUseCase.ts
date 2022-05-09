@@ -1,3 +1,4 @@
+import { inject, injectable } from "tsyringe";
 import { CustomersRepository } from "../../repositories/CustomersRepository";
 import { UsersRepository } from "../../repositories/UsersRepository";
 import { AppError } from "../../shared/errors/AppError";
@@ -15,9 +16,12 @@ interface UpdateCustomerUseCaseRequest {
   serviceStart: string;
 }
 
+@injectable()
 export class UpdateCustomerUseCase {
   constructor(
+    @inject("UsersRepository")
     private usersRepository: UsersRepository,
+    @inject("CustomersRepository")
     private customersRepository: CustomersRepository,
   ) {}
 

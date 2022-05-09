@@ -2,16 +2,21 @@ import { UsersRepository } from "../../repositories/UsersRepository";
 import { PasswordAdapter } from "../../services/password-adapter";
 import { TokenAdapter } from "../../services/token-adapter";
 import { AppError } from "../../shared/errors/AppError";
+import { inject, injectable } from "tsyringe";
 
 interface AuthenticateUseCaseRequest {
   email: string;
   password: string;
 }
 
+@injectable()
 export class AuthenticateUseCase {
   constructor(
+    @inject("UsersRepository")
     private usersRepository: UsersRepository,
+    @inject("PasswordAdapter")
     private passwordAdapter: PasswordAdapter,
+    @inject("TokenAdapter")
     private tokenAdapter: TokenAdapter,
   ) { }
 
