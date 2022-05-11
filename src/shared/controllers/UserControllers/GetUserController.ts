@@ -4,14 +4,15 @@ import { GetUserUseCase } from "../../../useCases/User/GetUserUseCase";
 
 class GetUserController {
   async handle(request: Request, response: Response): Promise<Response> {
-    const { userId, email } = request.body;
+    const { email } = request.body;
+    const { id } = request.user;
 
     const getUserUseCase = container.resolve(GetUserUseCase)
 
     const user = await getUserUseCase.execute({
-      userId,
+      userId: id,
       email,
-    })
+    });
 
     return response.status(202).json(user)
   }

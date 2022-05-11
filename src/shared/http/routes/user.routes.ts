@@ -16,7 +16,7 @@ userRoutes.post('/create', createUserController.handle);
 
 // Read
 const getUserController = new GetUserController();
-userRoutes.post('/findone', ensureAuthenticated , getUserController.handle);
+userRoutes.get('/findone', ensureAuthenticated , getUserController.handle);
 
 
 export default userRoutes;

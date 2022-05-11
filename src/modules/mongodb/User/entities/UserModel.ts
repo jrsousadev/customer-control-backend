@@ -5,6 +5,10 @@ export interface IListCustomers {
   customerId: mongoose.Types.ObjectId
 }
 
+/* export interface IListMounthBillings {
+  mounthId: mongoose.Types.ObjectId
+}*/
+
 export interface IConfidential {
   email: string;
 }
@@ -15,6 +19,7 @@ export interface IUser extends Document {
   confidential: IConfidential;
   isAdmin: boolean;
   listCustomers: IListCustomers[];
+/*   listMounthBillings: IListMounthBillings[]; */
 }
 
 const UserSchema = new Schema<IUser>(
@@ -47,7 +52,17 @@ const UserSchema = new Schema<IUser>(
         }
       ],
       default: []
-    }
+    },
+/*     listMounthBillings: {
+      type: [
+        {
+          billingId: {
+            type: Schema.Types.ObjectId,
+            ref: 'billingPerMounth'
+          }
+        }
+      ]
+    } */
   }, 
   {
     timestamps: {

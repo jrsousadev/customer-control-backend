@@ -5,7 +5,6 @@ import { UpdateCustomerUseCase } from "../../../useCases/Customer/UpdateCustomer
 class UpdateCustomerController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { 
-      userId,
       customerId,
       name,
       responsibleName,
@@ -16,6 +15,7 @@ class UpdateCustomerController {
       paymentMethod,
       serviceStart,
     } = request.body;
+    const { id: userId } = request.user;
 
     const updateCustomerUseCase = container.resolve(UpdateCustomerUseCase)
   

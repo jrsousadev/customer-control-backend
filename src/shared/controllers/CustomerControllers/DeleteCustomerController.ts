@@ -5,9 +5,9 @@ import { DeleteOneCustomerUseCase } from "../../../useCases/Customer/DeleteOneCu
 class DeleteCustomerController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { 
-      userId,
       customerId
     } = request.body;
+    const { id: userId } = request.user;
 
     const deleteOneCustomerUseCase = container.resolve(DeleteOneCustomerUseCase)
   
