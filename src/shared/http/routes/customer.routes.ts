@@ -14,11 +14,11 @@ customerRoutes.post('/create', createCustomerController.handle);
 
 //Read
 const getCustomerController = new GetCustomerController();
-customerRoutes.post('/findone', getCustomerController.handle);
+customerRoutes.get('/findone', getCustomerController.handle);
 
 //Update
 const updateCustomerController = new UpdateCustomerController();
-customerRoutes.post('/update', updateCustomerController.handle);
+customerRoutes.put('/update', updateCustomerController.handle);
 
 //Delete
 const deleteCustomerController = new DeleteCustomerController();
@@ -26,10 +26,10 @@ customerRoutes.delete('/delete', deleteCustomerController.handle);
 
 //Update Due Date
 const updateDueDateController = new UpdateDueDateController();
-customerRoutes.post('/update-dueDate', updateDueDateController.handle);
+customerRoutes.patch('/update-dueDate', updateDueDateController.handle);
 
 //Payment Success
 const paymentSucessController = new PaymentSucesssController();
-customerRoutes.post('/payment-success', paymentSucessController.handle);
+customerRoutes.patch('/payment-success', paymentSucessController.handle);
 
 export default customerRoutes;

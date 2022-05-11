@@ -11,10 +11,10 @@ billingPerMounthRoutes.post('/create', createBillingPerMounthController.handle);
 
 // Get
 const getBillingPerMounthController = new GetBillingPerMounthController();
-billingPerMounthRoutes.get('/:userId', getBillingPerMounthController.handle);
+billingPerMounthRoutes.get('/', getBillingPerMounthController.handle);
 
 // GetOne
 const getOneBillingPerMounthController = new GetOneBillingPerMounthController();
-billingPerMounthRoutes.post('/getOne/:userId', getOneBillingPerMounthController.handle);
+billingPerMounthRoutes.post('/getOne', getOneBillingPerMounthController.handle);
 
 export default billingPerMounthRoutes;

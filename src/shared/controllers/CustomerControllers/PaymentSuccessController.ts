@@ -4,7 +4,8 @@ import { PaymentSuccessCustomerUseCase } from "../../../useCases/Customer/Paymen
 
 class PaymentSucesssController {
   async handle(request: Request, response: Response): Promise<Response> {
-    const { userId, customerId } = request.body;
+    const { customerId } = request.body;
+    const { id: userId } = request.user;
 
     const paymentSuccessCustomerUseCase = container.resolve(PaymentSuccessCustomerUseCase);
 

@@ -31,7 +31,7 @@ container.registerSingleton<BillingPerMounthRepository>(
   MongoDBBillingPerMounthRepository
 )
 
-// ######## Service Injeccions ########
+// ######## Services Injeccions ########
 container.registerSingleton<TokenAdapter>(
   "TokenAdapter",
   JwtCreateAuthorizationToken

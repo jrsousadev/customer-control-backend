@@ -4,7 +4,8 @@ import { CreateBillingPerMounthUseCase } from "../../../useCases/BillingPerMount
 
 class CreateBillingPerMounthController {
   async handle(request: Request, response: Response): Promise<Response> {
-    const { mounthName, billing, year, userId } = request.body;
+    const { mounthName, billing, year } = request.body;
+    const { id: userId } = request.user;
     
     const createBillingPerMounthUseCase = container.resolve(CreateBillingPerMounthUseCase)
   

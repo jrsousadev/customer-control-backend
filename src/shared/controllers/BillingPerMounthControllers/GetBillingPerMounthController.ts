@@ -4,7 +4,7 @@ import { GetBillingPerMounthUseCase } from "../../../useCases/BillingPerMounth/G
 
 class GetBillingPerMounthController {
   async handle(request: Request, response: Response): Promise<Response> {
-    const { userId } = request.params;
+    const { id: userId } = request.user;
 
     const getBillingPerMounthUseCase = container.resolve(GetBillingPerMounthUseCase)
   

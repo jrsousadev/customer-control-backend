@@ -4,7 +4,8 @@ import { UpdateDueDateCustomerUseCase } from "../../../useCases/Customer/UpdateD
 
 class UpdateDueDateController {
   async handle(request: Request, response: Response): Promise<Response> {
-    const { customerId, dueDate, userId } = request.body;
+    const { customerId, dueDate } = request.body;
+    const { id: userId } = request.user;
 
     const updateDueDateCustomerUseCase = container.resolve(UpdateDueDateCustomerUseCase);
 

@@ -23,6 +23,8 @@ export default async function ensureAuthenticated(request: Request, response: Re
     const user = await UserModel.findById(_id, { password: 0 })
     if(!user) throw new Error("User does not exists")
   
+    request.user = { id: String(user._id) }
+
     return next();  
   } catch (err) {
     throw new AppError("INVALID_TOKEN");
