@@ -17,6 +17,9 @@ export class GetUserUseCase {
   async execute(request: GetUserUseCaseRequest) {
     let { email, userId } = request;
 
+    if(email === null && userId === null && email === "" && userId === "") 
+    throw new AppError('Internal server error')
+
     let user = null;
 
     if(user) email = null;
