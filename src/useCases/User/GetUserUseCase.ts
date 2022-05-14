@@ -18,7 +18,7 @@ export class GetUserUseCase {
     let { email, userId } = request;
 
     if(email === null && userId === null && email === "" && userId === "") 
-    throw new AppError('Internal server error')
+    throw new AppError(`Internal server error ${userId}`)
 
     let user = null;
 
