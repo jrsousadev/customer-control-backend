@@ -1,5 +1,7 @@
 export interface CreateToken {
   _id: string;
+  permissions: string[],
+  roles: string[],
 }
 
 export interface TokenAdapter{

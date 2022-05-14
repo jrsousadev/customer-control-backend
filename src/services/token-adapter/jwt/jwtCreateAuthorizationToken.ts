@@ -7,7 +7,7 @@ export class JwtCreateAuthorizationToken implements TokenAdapter {
     return jwt.sign(data, process.env.JWT_SECRET);
   }
 
-  async createAuthorization({ _id }: CreateToken) {
-    return this.encode({ _id });
+  async createAuthorization({ _id, permissions, roles }: CreateToken) {
+    return this.encode({ _id, permissions, roles });
   }
 }

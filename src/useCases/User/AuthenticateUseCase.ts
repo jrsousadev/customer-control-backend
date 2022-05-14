@@ -23,7 +23,7 @@ export class AuthenticateUseCase {
   async execute(request: AuthenticateUseCaseRequest) {
     const { email, password } = request;
 
-    let user = null;
+    let user= null;
 
     if (email) {
       const emailFormated = email.toLocaleLowerCase();
@@ -41,10 +41,13 @@ export class AuthenticateUseCase {
     const userToReturn = user.toObject();
     delete userToReturn.password
 
-    const token = await this.tokenAdapter.createAuthorization({_id: user._id});
+    const token = await this.tokenAdapter.createAuthorization({
+      _id: user._id,
+      permissions: user.permissions,
+      roles: user.roles
+    });
 
     return {
-      isAuthorized: true,
       authorization: `Bearer ${token}`,
       ...userToReturn,
      };

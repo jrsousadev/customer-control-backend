@@ -1,28 +1,9 @@
 import mongoose, { Schema } from "mongoose";
 import { hash } from 'bcrypt';
+import { IUserSpecification } from "../../../../specifications/user-specification";
+import { UserPermissionsTypes, UserRolesTypes } from "../../../../shared/utils/constants";
 
-export interface IListCustomers {
-  customerId: mongoose.Types.ObjectId
-}
-
-/* export interface IListMounthBillings {
-  mounthId: mongoose.Types.ObjectId
-}*/
-
-export interface IConfidential {
-  email: string;
-}
-
-export interface IUser extends Document {
-  name: string;
-  password: string;
-  confidential: IConfidential;
-  isAdmin: boolean;
-  listCustomers: IListCustomers[];
-/*   listMounthBillings: IListMounthBillings[]; */
-}
-
-const UserSchema = new Schema<IUser>(
+const UserSchema = new Schema<IUserSpecification>(
   {
     name: {
       type: String,
@@ -31,6 +12,16 @@ const UserSchema = new Schema<IUser>(
     password: {
       type: String,
       required: true,
+    },
+    permissions: {
+      type: [String],
+      enum: UserPermissionsTypes,
+      default: [UserPermissionsTypes.WITHOUT]
+    },
+    roles: {
+      type: [String],
+      enum: UserRolesTypes,
+      default: [UserRolesTypes.USER],
     },
     confidential: {
       email: {
@@ -53,16 +44,6 @@ const UserSchema = new Schema<IUser>(
       ],
       default: []
     },
-/*     listMounthBillings: {
-      type: [
-        {
-          billingId: {
-            type: Schema.Types.ObjectId,
-            ref: 'billingPerMounth'
-          }
-        }
-      ]
-    } */
   }, 
   {
     timestamps: {
